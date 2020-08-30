@@ -17,12 +17,19 @@ public class MessageController {
 
     @PostMapping(path = "/add") // Map ONLY POST Requests
     public @ResponseBody
-    String addNewMessage(@RequestParam String msg_data) {
+    String addNewMessage(@RequestParam String msg_data, @RequestParam Long user_id,
+                         @RequestParam Long msg_parentid) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
         Message msg = new Message();
         msg.setMsg_data(msg_data);
+        User user = new User();
+        user.setUser_id(user_id);
+        msg.setUser(user);
+        Message parentMsg = new Message();
+        parentMsg.setMsg_id(msg_parentid);
+        msg.setMessage(parentMsg);
         messageRepository.save(msg);
         return "Saved";
     }
