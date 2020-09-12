@@ -1,11 +1,9 @@
 package com.yaogo.demo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "find_all_users", query = "SELECT u from User u")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
